@@ -55,3 +55,26 @@ for ($i = 0; $i < 5; $i++) {
     $jumlah[] = rand(1,5);
 }
 ?>
+echo "<table border='1' cellpadding='8'>";
+echo "<tr>
+        <th>Kode</th>
+        <th>Nama Barang</th>
+        <th>Harga</th>
+        <th>Jumlah</th>
+        <th>Total</th>
+      </tr>";
+
+foreach ($beli as $key => $index) {
+    $item_total = $harga_barang[$index] * $jumlah[$key];
+    $total[] = $item_total;
+    $grandtotal += $item_total;
+
+    echo "<tr>
+            <td>{$kode_barang[$index]}</td>
+            <td>{$nama_barang[$index]}</td>
+            <td>{$harga_barang[$index]}</td>
+            <td>{$jumlah[$key]}</td>
+            <td>{$item_total}</td>
+          </tr>";
+}
+echo "</table>";
