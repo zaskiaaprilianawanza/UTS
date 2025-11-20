@@ -78,3 +78,4 @@ foreach ($beli as $key => $index) {
           </tr>";
 }
 echo "</table>";
+echo "<h3>Total Belanja: Rp $grandtotal</h3>";
