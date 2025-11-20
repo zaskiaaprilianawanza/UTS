@@ -79,3 +79,16 @@ foreach ($beli as $key => $index) {
 }
 echo "</table>";
 echo "<h3>Total Belanja: Rp $grandtotal</h3>";
+if ($grandtotal < 50000) {
+    $diskon_rate = 0.05;
+} elseif ($grandtotal <= 100000) {
+    $diskon_rate = 0.10;
+} else {
+    $diskon_rate = 0.15;
+}
+
+$diskon = $grandtotal * $diskon_rate;
+$total_akhir = $grandtotal - $diskon;
+
+echo "<h3>Diskon: " . ($diskon_rate * 100) . "%</h3>";
+echo "<h3>Total Setelah Diskon: Rp $total_akhir</h3>";
