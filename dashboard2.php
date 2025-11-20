@@ -43,3 +43,15 @@ $harga_barang = [5000000,50000,100000,50000,35000];
 
 </body>
 </html>
+<?php
+$beli = [];
+$jumlah = [];
+$total = [];
+$grandtotal = 0;
+
+for ($i = 0; $i < 5; $i++) {
+    $idx = rand(0,4);
+    $beli[] = $idx;
+    $jumlah[] = rand(1,5);
+}
+?>
