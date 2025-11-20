@@ -1,49 +1,18 @@
 <?php
 session_start();
+
+// Jika belum login, redirect ke login
 if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
+    header("Location: index.php"); // pastikan ini sesuai file login Anda
     exit;
 }
-?>
 
-<!DOCTYPE html>
-<html>
-<head><title>Dashboard</title></head>
-<body>
-
-<h2>Selamat datang, <?php echo $_SESSION['username']; ?>!</h2>
-
-<a href="logout.php">Logout</a>
-
-</body>
-</html>
-<?php
-session_start();
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
-    exit;
-}
-?>
-
-<!DOCTYPE html>
-<html>
-<head><title>Dashboard Penjualan</title></head>
-<body>
-
-<h1>-- POLGAN MART --</h1>
-<h3>Selamat datang, <?php echo $_SESSION['username']; ?></h3>
-
-<?php
+// Data produk
 $kode_barang  = ["001","002","003","004","005"];
 $nama_barang  = ["Laptop","Mouse","Speaker","Tas Laptop","Mouse Pad"];
 $harga_barang = [5000000,50000,100000,50000,35000];
-?>
 
-<a href="logout.php">Logout</a>
-
-</body>
-</html>
-<?php
+// Logika pembelian random
 $beli = [];
 $jumlah = [];
 $total = [];
@@ -55,40 +24,77 @@ for ($i = 0; $i < 5; $i++) {
     $jumlah[] = rand(1,5);
 }
 ?>
-echo "<table border='1' cellpadding='8'>";
-echo "<tr>
-        <th>Kode</th>
-        <th>Nama Barang</th>
-        <th>Harga</th>
-        <th>Jumlah</th>
-        <th>Total</th>
-      </tr>";
 
-foreach ($beli as $key => $index) {
-    $item_total = $harga_barang[$index] * $jumlah[$key];
-    $total[] = $item_total;
-    $grandtotal += $item_total;
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard Penjualan</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f0f2f5;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .welcome {
+      margin-bottom: 20px;
+      font-size: 18px;
+      color: #34495e;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: center;
+      color: #2c3e50;
+    }
+    th {
+      background-color: #3498db;
+      color: white;
+    }
+    tfoot td {
+      font-weight: bold;
+      background-color: #ecf0f1;
+    }
+    .logout {
+      display: block;
+      margin: 25px auto 0;
+      width: 120px;
+      padding: 10px;
+      background-color: #e74c3c;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .logout:hover {
+      background-color: #c0392b;
+    }
+    .discount-info {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #16a085;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
 
-    echo "<tr>
-            <td>{$kode_barang[$index]}</td>
-            <td>{$nama_barang[$index]}</td>
-            <td>{$harga_barang[$index]}</td>
-            <td>{$jumlah[$key]}</td>
-            <td>{$item_total}</td>
-          </tr>";
-}
-echo "</table>";
-echo "<h3>Total Belanja: Rp $grandtotal</h3>";
-if ($grandtotal < 50000) {
-    $diskon_rate = 0.05;
-} elseif ($grandtotal <= 100000) {
-    $diskon_rate = 0.10;
-} else {
-    $diskon_rate = 0.15;
-}
+<h1>-- POLGAN MART --</h1>
 
-$diskon = $grandtotal * $diskon_rate;
-$total_akhir = $grandtotal - $diskon;
-
-echo "<h3>Diskon: " . ($diskon_rate * 100) . "%</h3>";
-echo "<h3>Total Setelah Diskon: Rp $total_akhir</h3>";
+<div class
